@@ -51,8 +51,8 @@ jobs:
       id: any-type-match
       with:
         # text: ${{ github.event. }}
-        find: '\:[\s]*any'
-        include: '*.js'
+        find: "\:[\s]*any"
+        # include: "*.js"
 
     - uses: actions-ecosystem/action-add-labels@v1
       if: ${{ steps.any-type-match.outputs.match > 0 }}
