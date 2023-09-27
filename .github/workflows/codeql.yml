@@ -55,7 +55,7 @@ jobs:
         # include: "*.js"
 
     - uses: actions-ecosystem/action-add-labels@v1
-      if: ${{ steps.any-type-match.outputs.match > 0 }}
+      if: ${{ steps.any-type-match.outputs.fileFoundCount > 0 }}
       with:
         # github_token: ${{ secrets.GITHUB_TOKEN }}
         labels: ':any'
