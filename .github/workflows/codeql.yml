@@ -16,3 +16,4 @@ jobs:
         with:
           text: ${{ steps.git-full-diff.outputs.diff }}
           regex: '\:any$'
+      - run: echo "Matches: ${{ steps.regex-match.outputs.match != '' }}"
