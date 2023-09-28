@@ -26,12 +26,12 @@ jobs:
       id: any-type
       with:
         text: 'any'
-        include: 'src/*.ts'
+        include: '*.ts'
         exclude-dir: '{node_modules,coverage}'
         error-on-find: true
     - id: add-label #uses: actions-ecosystem/action-add-labels@v1
-      # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
-      run: echo "The count is ${{ steps.any-type.outputs.fileFoundCount }}"
+      # if: ${{ steps.any-type.outputs.count > 0 }}
+      run: echo "The count is ${{ steps.any-type.outputs.count }}"
       # with:
       #   github_token: ${{ secrets.GITHUB_TOKEN }}
       #   labels: any
