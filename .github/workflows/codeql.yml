@@ -28,14 +28,14 @@ jobs:
 
     - name: Check (any) type
       uses: nguyenvanuyn96/str-find-action@master
-      id: any-type-match
+      id: any-type
       with:
         # text: ${{ github.event. }}
         find: /\:[\s]*any/i
         include: "src/*.ts"
 
     - uses: actions-ecosystem/action-add-labels@v1
-      if: ${{ steps.any-type-match.outputs.fileFoundCount > 0 }}
+      # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
       with:
         # github_token: ${{ secrets.GITHUB_TOKEN }}
-        labels: ':any'
+        labels: any
