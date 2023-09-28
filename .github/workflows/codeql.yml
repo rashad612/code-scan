@@ -10,10 +10,9 @@ jobs:
           fetch-depth: 0
       - id: git-full-diff
         uses: fernandosmither/git-full-diff@v1.0.2
-      - name: display diff
-        run: |
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          cat <<$EOF
-          ${{ steps.git-full-diff.outputs.diff }}
-          $EOF
-        shell: bash
+      
+      - uses: kaisugi/action-regex-match@v1.0.0
+        id: regex-match
+        with:
+          text: ${{ steps.git-full-diff.outputs.diff }}
+          regex: '\:any$'
