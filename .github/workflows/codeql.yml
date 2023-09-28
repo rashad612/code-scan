@@ -22,7 +22,7 @@ jobs:
 
     - id: add-label #uses: actions-ecosystem/action-add-labels@v1
       # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
-      run: echo "The count is ${{steps.any-type.outputs.fileFoundCount }}"
+      run: echo "The count is ${{ context.payload.pull_request.head.sha }}"
       # with:
       #   github_token: ${{ secrets.GITHUB_TOKEN }}
       #   labels: any
