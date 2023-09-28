@@ -26,11 +26,7 @@
 #         labels: any
 
 name: Add Labels
-
-on:
-  pull_request:
-    types: opened
-
+on: [push,pull_request]
 jobs:
   add_labels:
     runs-on: ubuntu-latest
