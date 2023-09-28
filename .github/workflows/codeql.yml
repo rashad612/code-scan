@@ -20,7 +20,7 @@ jobs:
         find: "any"
         include: "src/*.ts"
 
-    - uses: actions-ecosystem/action-add-labels@v1
+    - id: add-label #uses: actions-ecosystem/action-add-labels@v1
       # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
       run: echo "The count is ${{ steps.any-type.outputs.fileFoundCount }} >> $GITHUB_OUTPUT"
       with:
