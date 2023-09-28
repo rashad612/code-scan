@@ -21,9 +21,5 @@ jobs:
       uses: fernandosmither/git-full-diff@v1.0.2
 
     - name: Display Diff
-      run: |
-        EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-        cat <<$EOF
-        ${{ steps.git-full-diff.outputs.diff }}
-        $EOF
+      run: "echo ${{ steps.git-full-diff.outputs.diff }}"
       shell: bash
