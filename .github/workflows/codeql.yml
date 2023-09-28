@@ -20,7 +20,7 @@ jobs:
       with:
         # text: ${{ github.event. }}
         find: "any"
-        include: 'src/*.ts'
+        include: 'src*.ts'
     
       # uses: vrsoftbr/search-text@v1
       # id: any-type
@@ -31,7 +31,7 @@ jobs:
       #   error-on-find: false
     - id: add-label #uses: actions-ecosystem/action-add-labels@v1
       # if: ${{ steps.any-type.outputs.count > 0 }}
-      run: echo "The count is ${{ steps.any-type.outputs.resultArray }}"
+      run: echo "The count is ${{ steps.any-type.outputs.fileFoundCount }}"
       # with:
       #   github_token: ${{ secrets.GITHUB_TOKEN }}
       #   labels: any
