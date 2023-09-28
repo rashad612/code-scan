@@ -6,7 +6,9 @@ on: [pull_request]
 jobs:
   tagger:
     name: Analyze
-    permissions: write-all
+    permissions: 
+      pull-requests: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -22,7 +24,7 @@ jobs:
 
     - id: add-label #uses: actions-ecosystem/action-add-labels@v1
       # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
-      run: echo "The count is ${{ context.payload.pull_request.head.sha }}"
+      run: echo "The count is ${{ steps.any-type.outputs.fileFoundCount }}"
       # with:
       #   github_token: ${{ secrets.GITHUB_TOKEN }}
       #   labels: any
