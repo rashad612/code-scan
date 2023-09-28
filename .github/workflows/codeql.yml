@@ -21,7 +21,7 @@ jobs:
         include: "src/*.ts"
 
     - uses: actions-ecosystem/action-add-labels@v1
-      if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
+      # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         labels: any
