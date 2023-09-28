@@ -18,11 +18,11 @@ jobs:
       with:
         # text: ${{ github.event. }}
         find: "any"
-        include: "src/*.ts"
+        include: "**.ts"
 
     - id: add-label #uses: actions-ecosystem/action-add-labels@v1
       # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
-      run: echo "The count is ${{ github.event.comment.body }}"
+      run: echo "The count is ${{steps.any-type.outputs.fileFoundCounty }}"
       # with:
       #   github_token: ${{ secrets.GITHUB_TOKEN }}
       #   labels: any
