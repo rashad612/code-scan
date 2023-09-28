@@ -20,7 +20,7 @@ jobs:
       with:
         # text: ${{ github.event. }}
         find: "any"
-        include: '.*.ts'
+        include: 'src/*.ts'
     
       # uses: vrsoftbr/search-text@v1
       # id: any-type
