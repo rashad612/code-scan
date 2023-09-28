@@ -32,7 +32,7 @@ jobs:
       with:
         # text: ${{ github.event. }}
         find: /\:[\s]*any/i
-        include: "*.ts"
+        include: "src/*.ts"
 
     - uses: actions-ecosystem/action-add-labels@v1
       if: ${{ steps.any-type-match.outputs.fileFoundCount > 0 }}
