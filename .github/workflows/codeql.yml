@@ -1,26 +1,44 @@
-name: "Tag :any"
+# name: "Tag :any"
 
-on: [pull_request]
+# on: [pull_request]
   
 
+# jobs:
+#   analyze:
+#     name: Analyze
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v3
+
+#     - name: Check (any) type
+#       uses: nguyenvanuyn96/str-find-action@master
+#       id: any-type
+#       with:
+#         # text: ${{ github.event. }}
+#         find: /\:[\s]*any/i
+#         include: "src/*.ts"
+
+#     - uses: actions-ecosystem/action-add-labels@v1
+#       # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         labels: any
+
+name: Add Labels
+
+on:
+  pull_request:
+    types: opened
+
 jobs:
-  analyze:
-    name: Analyze
+  add_labels:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v2
 
-    - name: Check (any) type
-      uses: nguyenvanuyn96/str-find-action@master
-      id: any-type
-      with:
-        # text: ${{ github.event. }}
-        find: /\:[\s]*any/i
-        include: "src/*.ts"
-
-    - uses: actions-ecosystem/action-add-labels@v1
-      # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        labels: any
+      - name: add labels
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: anyy
