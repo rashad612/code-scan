@@ -20,7 +20,7 @@ jobs:
       with:
         # text: ${{ github.event. }}
         find: "any"
-        include: "src/*.ts"
+        include: "src/**/*.ts"
 
     - id: add-label #uses: actions-ecosystem/action-add-labels@v1
       # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
