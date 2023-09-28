@@ -16,7 +16,7 @@ jobs:
         with:
           text: ${{ steps.git-full-diff.outputs.diff }}
           regex: 'any'
-          flags: 'gi'
+          flags: 'i'
 
       - id: out
         run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
