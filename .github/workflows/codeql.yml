@@ -2,13 +2,13 @@ name: "Tag :any"
 
 on: [pull_request]
   
+permissions: 
+  pull-requests: write
+  contents: read
 
 jobs:
   tagger:
     name: Analyze
-    permissions: 
-      pull-requests: write
-      contents: read
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
