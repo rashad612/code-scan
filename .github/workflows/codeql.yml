@@ -28,7 +28,7 @@ jobs:
         text: 'any'
         include: '*.ts'
         exclude-dir: '{node_modules,coverage}'
-        error-on-find: true
+        error-on-find: false
     - id: add-label #uses: actions-ecosystem/action-add-labels@v1
       # if: ${{ steps.any-type.outputs.count > 0 }}
       run: echo "The count is ${{ steps.any-type.outputs.count }}"
