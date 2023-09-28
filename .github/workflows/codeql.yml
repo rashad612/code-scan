@@ -29,6 +29,7 @@ name: Add Labels
 on: [push,pull_request]
 jobs:
   add_labels:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: checkout
