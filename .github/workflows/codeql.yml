@@ -17,7 +17,7 @@ jobs:
       id: any-type
       with:
         # text: ${{ github.event. }}
-        find: /\:[\s]*any/i
+        find: "any"
         include: "src/*.ts"
 
     - uses: actions-ecosystem/action-add-labels@v1
