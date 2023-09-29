@@ -1,6 +1,1 @@
-interface iUser {
-  name: any;
-  address:any;
-  labels: [ANY];
-
-}
+export const fn = () => {};
