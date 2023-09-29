@@ -3,6 +3,9 @@ on: [pull_request]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
     name: A job to say hello
     steps:
       - uses: actions/checkout@v3
