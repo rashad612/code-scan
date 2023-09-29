@@ -40,8 +40,8 @@ jobs:
         id: regex-match
         if: steps.changed-files-yaml.outputs.src_any_changed == 'true'
         with:
-          text: "nothing playing"
-          regex: 'ing'
+          text: ${{ steps.git-full-diff.outputs.diff }}
+          regex: 'classsss'
           flags: 'i'
 
       - id: out
