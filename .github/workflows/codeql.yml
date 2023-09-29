@@ -41,7 +41,7 @@ jobs:
         if: steps.changed-files-yaml.outputs.src_any_changed == 'true'
         with:
           text: "nothing"
-          regex: 'class'
+          regex: 'ing'
           flags: 'i'
 
       - id: out
