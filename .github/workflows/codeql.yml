@@ -40,7 +40,7 @@ jobs:
         id: regex-match
         if: steps.changed-files-yaml.outputs.src_any_changed == 'true'
         with:
-          text: ${{ steps.git-full-diff.outputs.diff }}
+          text: "nothing"
           regex: 'class'
           flags: 'i'
 
