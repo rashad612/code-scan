@@ -18,8 +18,8 @@ jobs:
         id: regex-match
         with:
           text: ${{ steps.git-full-diff.outputs.diff }}
-          regex: '\:any'
+          regex: 'interface'
           flags: 'i'
 
       - id: out
-        run: "echo Matches: ${{ steps.regex-match.outputs.group1 }}"
+        run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
