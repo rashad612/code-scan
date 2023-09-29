@@ -18,7 +18,7 @@ jobs:
         id: regex-match
         with:
           text: ${{ steps.git-full-diff.outputs.diff }}
-          regex: 'any'
+          regex: '\:[\s\S]*any'
           flags: 'i'
 
       - id: out
