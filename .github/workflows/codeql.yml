@@ -1,4 +1,7 @@
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   hello_world_job:
@@ -11,15 +14,32 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - id: git-full-diff
-        uses: fernandosmither/git-full-diff@v1.0.2
-      
-      - uses: kaisugi/action-regex-match@v1.0.0
-        id: regex-match
+  
+      - name: Get all test, doc and src files that have changed
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v39
         with:
-          text: ${{ steps.git-full-diff.outputs.diff }}
-          regex: 'interface'
-          flags: 'i'
+          files_yaml: |
+            src:
+              - src/**/*.ts
+          # Optionally set `files_yaml_from_source_file` to read the YAML from a file. e.g `files_yaml_from_source_file: .github/changed-files.yml`
 
-      - id: out
-        run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
+      - name: Run step if test file(s) change
+        # NOTE: Ensure all outputs are prefixed by the same key used above e.g. `test_(...)` | `doc_(...)` | `src_(...)` when trying to access the `any_changed` output.
+        if: steps.changed-files-yaml.outputs.test_any_changed == 'true'  
+        run: |
+          echo "One or more test file(s) has changed."
+          echo "List all the files that have changed: ${{ steps.changed-files-yaml.outputs.test_all_changed_files }}"
+
+      # - id: git-full-diff
+      #   uses: fernandosmither/git-full-diff@v1.0.2
+      
+      # - uses: kaisugi/action-regex-match@v1.0.0
+      #   id: regex-match
+      #   with:
+      #     text: ${{ steps.git-full-diff.outputs.diff }}
+      #     regex: 'interface'
+      #     flags: 'i'
+
+      # - id: out
+      #   run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
