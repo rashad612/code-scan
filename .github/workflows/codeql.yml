@@ -26,10 +26,10 @@ jobs:
 
       - name: Run step if test file(s) change
         # NOTE: Ensure all outputs are prefixed by the same key used above e.g. `test_(...)` | `doc_(...)` | `src_(...)` when trying to access the `any_changed` output.
-        if: steps.changed-files-yaml.outputs.test_any_changed == 'true'  
+        if: steps.changed-files-yaml.outputs.src_any_changed == 'true'  
         run: |
-          echo "One or more test file(s) has changed."
-          echo "List all the files that have changed: ${{ steps.changed-files-yaml.outputs.test_all_changed_files }}"
+          echo "One or more src file(s) has changed."
+          echo "List all the files that have changed: ${{ steps.changed-files-yaml.outputs.src_all_changed_files }}"
 
       # - id: git-full-diff
       #   uses: fernandosmither/git-full-diff@v1.0.2
