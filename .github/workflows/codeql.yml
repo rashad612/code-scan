@@ -24,22 +24,24 @@ jobs:
               - src/**/*.ts
           # Optionally set `files_yaml_from_source_file` to read the YAML from a file. e.g `files_yaml_from_source_file: .github/changed-files.yml`
 
-      - name: Run step if test file(s) change
+      - name: Run step if src file(s) change
         # NOTE: Ensure all outputs are prefixed by the same key used above e.g. `test_(...)` | `doc_(...)` | `src_(...)` when trying to access the `any_changed` output.
         if: steps.changed-files-yaml.outputs.src_any_changed == 'true'  
         run: |
           echo "One or more src file(s) has changed."
           echo "List all the files that have changed: ${{ steps.changed-files-yaml.outputs.src_all_changed_files }}"
 
-      # - id: git-full-diff
-      #   uses: fernandosmither/git-full-diff@v1.0.2
+      - name: Git Full Diff
+        if: steps.changed-files-yaml.outputs.src_any_changed == 'true'
+        id: git-full-diff
+        uses: fernandosmither/git-full-diff@v1.0.2
       
-      # - uses: kaisugi/action-regex-match@v1.0.0
-      #   id: regex-match
-      #   with:
-      #     text: ${{ steps.git-full-diff.outputs.diff }}
-      #     regex: 'interface'
-      #     flags: 'i'
+      - uses: kaisugi/action-regex-match@v1.0.0
+        id: regex-match
+        with:
+          text: ${{ steps.git-full-diff.outputs.diff }}
+          regex: 'class'
+          flags: 'i'
 
-      # - id: out
-      #   run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
+      - id: out
+        run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
