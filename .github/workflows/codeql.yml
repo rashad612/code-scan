@@ -22,4 +22,4 @@ jobs:
           flags: 'i'
 
       - id: out
-        run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
+        run: "echo Matches: ${{ steps.regex-match.outputs.group1 }}"
