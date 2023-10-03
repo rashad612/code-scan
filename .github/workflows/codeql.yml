@@ -1,26 +1,48 @@
-name: "Tag :any"
-
-on: [pull_request]
-  
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  analyze:
-    name: Analyze
+  hello_world_job:
     runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
+      contents: read
+    name: A job to say hello
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+  
+      - name: Get all test, doc and src files that have changed
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v39
+        with:
+          files_yaml: |
+            src:
+              - src/**/*.ts
+          # Optionally set `files_yaml_from_source_file` to read the YAML from a file. e.g `files_yaml_from_source_file: .github/changed-files.yml`
 
-    - name: Check (any) type
-      uses: nguyenvanuyn96/str-find-action@master
-      id: any-type
-      with:
-        # text: ${{ github.event. }}
-        find: /\:[\s]*any/i
-        include: "src/*.ts"
+      - name: Run step if src file(s) change
+        # NOTE: Ensure all outputs are prefixed by the same key used above e.g. `test_(...)` | `doc_(...)` | `src_(...)` when trying to access the `any_changed` output.
+        if: steps.changed-files-yaml.outputs.src_any_changed == 'true'  
+        run: |
+          echo "One or more src file(s) has changed."
+          echo "List all the files that have changed: ${{ steps.changed-files-yaml.outputs.src_all_changed_files }}"
 
-    - uses: actions-ecosystem/action-add-labels@v1
-      # if: ${{ steps.any-type.outputs.fileFoundCount > 0 }}
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        labels: any
+      - name: Git Full Diff
+        if: steps.changed-files-yaml.outputs.src_any_changed == 'true'
+        id: git-full-diff
+        uses: fernandosmither/git-full-diff@v1.0.2
+      
+      - uses: kaisugi/action-regex-match@v1.0.0
+        id: regex-match
+        if: steps.changed-files-yaml.outputs.src_any_changed == 'true'
+        with:
+          text: ${{ steps.git-full-diff.outputs.diff }}
+          regex: 'classsss'
+          flags: 'i'
+
+      - id: out
+        run: "echo Matches: ${{ steps.regex-match.outputs.match }}"
